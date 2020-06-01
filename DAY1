@@ -1,0 +1,15 @@
+//Invert a binary tree.
+
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+       if (root == NULL) {
+            return NULL; // terminal condition
+        }
+        auto left = invertTree(root->left); // invert left sub-tree
+        auto right = invertTree(root->right); // invert right sub-tree
+        root->left = right; // put right on left
+        root->right = left; // put left on right
+        return root;
+    }
+};
