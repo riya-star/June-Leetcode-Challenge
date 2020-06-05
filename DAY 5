@@ -1,0 +1,31 @@
+//Random Pick with Weight
+
+
+
+
+
+class Solution {
+    private:
+    vector<int> weights;  
+    vector<double> probab; 
+public:
+    Solution(vector<int>& w) {
+        weights = w;
+        double sum = accumulate(weights.begin(), weights.end(), 0.0);
+        for(int i = 0; i < weights.size(); ++i){
+            double prob = double(weights[i])/sum; 
+            if(i != 0)
+                prob += probab[i-1];
+            probab.push_back(prob); 
+        }
+    }
+    
+    int pickIndex() {
+        random_device rd;
+        std::mt19937 mt(rd());
+        std::uniform_real_distribution<double> dist(0.0, 1.0);
+        double prob = dist(mt);
+        auto it = upper_bound(probab.begin(), probab.end(), prob);
+        return it - probab.begin();
+    }
+}
