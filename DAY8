@@ -1,0 +1,14 @@
+//Power of two
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        double a = log2(n);
+        cout<<a;
+        if(a-(floor(a))==0)
+        {
+            return true;
+        }
+        return false;
+    }
+};
